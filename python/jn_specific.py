@@ -22,6 +22,12 @@ class JnSpecific():
         self.html_template_start = "<div id=\"main_content_wrap\" class=\"outer\">\n<section id=\"main_content\" class=\"inner\">\n"
         self.html_template_end = "\n</section>\n</div>"
 
+        with open('items-start.template', 'r') as content_file:
+            self.items_html_start = content_file.read()
+
+        with open('items-end.template', 'r') as content_file:
+            self.items_html_end = content_file.read()
+
         return
 
     def parse_string(self):
@@ -99,9 +105,16 @@ class JnSpecific():
         f.write(html_string)
         f.close()
 
+    def write_items_html(self, html_string, file_name):
+        html_string = self.items_html_start + self.html_template_start + html_string + self.html_template_end + self.items_html_end
+        f = open(file_name,'w')
+        f.write(html_string)
+        f.close()
+
 if __name__ == "__main__":
     jn = JnSpecific()
     jn.parse_string()
     jn.classify_items()
     jn.sort_items()
-    jn.write_html_to_file(jn.regular_items_to_html(), "../docs/items-content.html")
+    # jn.write_html_to_file(jn.regular_items_to_html(), "../docs/items-content.html")
+    jn.write_items_html(jn.regular_items_to_html(), "../docs/items.html")

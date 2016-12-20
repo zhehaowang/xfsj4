@@ -1,0 +1,10 @@
+</div>
+<!-- 
+    <script>
+      $(function(){
+        $("#my-content").load("items-content.html"); 
+      });
+    </script>
+     -->
+  </body>
+</html>
