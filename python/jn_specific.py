@@ -73,8 +73,15 @@ class JnSpecific():
     def beautify_escaped_string_html(self, s):
         s = re.sub(r"\|n", "<br>", s)
         #s = re.sub(r"\|cff([0-9a-zA-z]{6})([^\|]*)\|r", r"<font color=#\1>\2</font>", s)
+        
+        len_front = len(re.findall(r"\|cff([0-9a-zA-z]{6})", s))
+        len_back = len(re.findall(r"\|r", s))
+
         s = re.sub(r"\|cff([0-9a-zA-z]{6})", r"<font color=#\1>", s)
         s = re.sub(r"\|r", r"</font>", s)
+
+        for i in range(len_back, len_front):
+            s += "</font>"
         return s
 
     def regular_items_to_html(self):
@@ -82,7 +89,7 @@ class JnSpecific():
         for item in self.item_regular:
             html_string += "<h3 id=\"it-" + item["item_id"] + "\">" + self.beautify_escaped_string_html(item["name"]) + "</h3>\n"
             # html_string += "<p><b>等级 </b>" + self.beautify_escaped_string_html(item["jn_class"]) + "</p>\n"
-            html_string += "<p><b>" + self.beautify_escaped_string_html(item["description"]) + "<b></p>\n<br>\n"
+            html_string += "<p><b>" + self.beautify_escaped_string_html(item["description"]) + "</b></p>\n<br>\n"
             # html_string += "<p><b>掉落/相关触发</b>" + item["class"] + "</p>\n"
         return html_string
 

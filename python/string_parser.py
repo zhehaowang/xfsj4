@@ -128,7 +128,7 @@ def pretty_print(this_dict):
 if __name__ == "__main__":
     string_parser = StringParse()
     string_parser.parse()
-    pretty_print(string_parser.item_id_dict)
+    #pretty_print(string_parser.item_id_dict)
     #pretty_print(string_parser.unit_id_dict)
     #pretty_print(string_parser.spell_id_dict)
     #pretty_print(string_parser.tech_id_dict)
